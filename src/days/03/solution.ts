@@ -196,7 +196,7 @@ function isValidPosition(mapWithFullNumbers: Map, pos: Position): boolean {
   return x >= 0 && x < width && y >= 0 && y < height;
 }
 
-function isSymbolPart1(char: string) {
+export function isSymbolPart1(char: string) {
   const isNumber = !isNaN(parseInt(char));
 
   return !isNumber && char !== ".";
