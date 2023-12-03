@@ -1,9 +1,10 @@
 {
   "name": "advent-of-code-23",
-  "module": "src/runner/index.ts",
+  "module": "src/runner/solve.ts",
   "type": "module",
   "scripts": {
-    "solve": "bun run src/runner/index.ts"
+    "solve": "bun run src/runner/solve.ts",
+    "scaffold": "bun run src/runner/scaffold.ts"
   },
   "devDependencies": {
     "bun-types": "latest"
