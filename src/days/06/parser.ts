@@ -29,3 +29,20 @@ function parseLine(line: string): number[] {
     .map((n) => parseInt(n))
     .filter((n) => !Number.isNaN(n));
 }
+
+export function parseInputPart2(input: string): Race {
+  const [timeLine, recordLine] = input.split("\n");
+
+  const time = parseLinePart2(timeLine);
+  const record = parseLinePart2(recordLine);
+
+  return {
+    time,
+    record,
+  };
+}
+
+function parseLinePart2(line: string): number {
+  const numberParts = line.split(":")[1];
+  return parseInt(numberParts.replaceAll(" ", ""));
+}
