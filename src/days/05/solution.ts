@@ -2,25 +2,39 @@ import { parseInput } from "./parser";
 import type { Almanac, Mapping, Range } from "./parser";
 
 export function part1(input: string) {
-  const parsed = parseInput(input);
+  const almanac = parseInput(input);
 
-  const result: number = getLowestLocation(parsed);
+  const result: number = getLowestLocation(almanac.mappings, almanac.seeds);
 
   console.log(`Solution to part 1 is ${result}`);
 }
 
-// export function part2(input: string) {
-//   const parsed = parseInput(input);
+export function part2(input: string) {
+  const almanac = parseInput(input);
 
-//   const result: number = getSum(parsed);
+  const { seeds: originalSeeds } = almanac;
+  const { mappings } = almanac;
+  let currentMin = getLocationNumber(mappings, originalSeeds[0]);
 
-//   console.log(`Solution to part 2 is ${result}`);
-// }
+  for (let i = 0; i < originalSeeds.length; i = i + 2) {
+    let index = 0;
+    let range = originalSeeds[i + 1];
 
-function getLowestLocation(almanac: Almanac): number {
-  return Math.min(
-    ...almanac.seeds.map((seed) => getLocationNumber(almanac.mappings, seed))
-  );
+    while (index < range) {
+      const currentSeed = originalSeeds[i] + index;
+      currentMin = Math.min(
+        currentMin,
+        getLocationNumber(mappings, currentSeed)
+      );
+
+      index++;
+    }
+  }
+  console.log(`Solution to part 2 is ${currentMin}`);
+}
+
+function getLowestLocation(mappings: Mapping[], seeds: number[]): number {
+  return Math.min(...seeds.map((seed) => getLocationNumber(mappings, seed)));
 }
 
 function getLocationNumber(mappings: Mapping[], seed: number): number {
